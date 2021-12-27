@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_golden/backend/downloader.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Row(
           children: [
             Image.asset(
-              'images/youtube-golden-logo-15.png',
+              'images/youtube-golden-logo.png',
               fit: BoxFit.cover,
             ),
             const SizedBox(
@@ -51,6 +52,24 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline5,
             )
           ],
+        ),
+      ),
+      drawer: SafeArea(
+        child: Drawer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                child: Card(
+                  child: Text(
+                    "Test",
+                    style: TextStyle(fontSize: 28),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       body: SafeArea(
