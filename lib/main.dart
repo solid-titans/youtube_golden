@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_golden/backend/downloader.dart';
+import 'package:youtube_golden/video.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,14 +10,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Youtube Golden',
       theme: ThemeData(
           primarySwatch: Colors.amber,
           textTheme: const TextTheme(
+              bodyText1: TextStyle(
+                fontSize: 20,
+              ),
               headline5: TextStyle(
-            fontSize: 22.5,
-            fontWeight: FontWeight.bold,
-          ))),
+                fontSize: 22.5,
+                fontWeight: FontWeight.bold,
+              ))),
       home: MyHomePage(title: 'Youtube Golden'),
     );
   }
@@ -35,6 +38,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    List<VideoCardClass> videos = [];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -64,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Card(
                   child: Text(
                     "Test",
-                    style: TextStyle(fontSize: 28),
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
               ),
@@ -73,8 +78,24 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: SafeArea(
-        child: Card(
-          child: Text("Video"),
+        child: ListView.builder(
+          itemCount: videos.length,
+          itemBuilder: (context, index) => Container(
+            width: double.infinity,
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    videos[index].name,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Text(videos[index].url)
+                ],
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
