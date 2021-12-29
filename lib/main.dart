@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_golden/video.dart';
+import 'package:youtube_golden/widgets/videoListWidget.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,8 +39,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    List<VideoCardClass> videos = [];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -78,31 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: videos.length,
-          itemBuilder: (context, index) => Container(
-            width: double.infinity,
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    videos[index].name,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Text(videos[index].url)
-                ],
-              ),
-            ),
-          ),
-        ),
+        child: VideoListWidget(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         tooltip: 'Downloaded Files',
         child: Icon(
-          Icons.cloud_download,
+          Icons.link,
           color: Colors.white,
         ),
       ),
