@@ -12,10 +12,10 @@ class _VideoListWidgetState extends State<VideoListWidget> {
   final List<VideoModel> video = List.generate(
       1000,
       (index) => VideoModel(
-          name: "Video ${index + 1}",
-          url: "asdoasdopaksdopkasodkoaskdopaksdopkaopsdkoaskdop",
-          creationDate: DateTime.now(),
-          domain: "Youtube"));
+          name: "Video $index",
+          url: "http://www.example.com/watch?id=$index",
+          creationDate: DateTime.now().add(Duration(days: index)),
+          domain: "Example domain"));
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +24,28 @@ class _VideoListWidgetState extends State<VideoListWidget> {
       itemBuilder: (context, index) => Container(
         width: double.infinity,
         child: Card(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                this.video[index].name,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyText1,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: RefreshProgressIndicator(
+                  value: null,
+                ),
               ),
-              Text(
-                this.video[index].url,
-                overflow: TextOverflow.ellipsis,
-              )
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SelectableText(
+                    this.video[index].name,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Text(
+                    "${this.video[index].domain} - ${this.video[index].creationDate.toLocal()}",
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  )
+                ],
+              ),
             ],
           ),
         ),

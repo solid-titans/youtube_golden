@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_golden/video.dart';
 import 'package:youtube_golden/widgets/videoListWidget.dart';
 
 void main() {
@@ -13,15 +12,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Youtube Golden',
       theme: ThemeData(
-          primarySwatch: Colors.amber,
-          textTheme: const TextTheme(
-              bodyText1: TextStyle(
-                fontSize: 20,
-              ),
-              headline5: TextStyle(
-                fontSize: 22.5,
-                fontWeight: FontWeight.bold,
-              ))),
+        primarySwatch: Colors.amber,
+        textTheme: const TextTheme(
+            bodyText1: TextStyle(
+              fontSize: 20,
+            ),
+            headline5: TextStyle(
+              fontSize: 22.5,
+              fontWeight: FontWeight.bold,
+            ),
+            subtitle1: TextStyle(
+                fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic)),
+      ),
       home: MyHomePage(title: 'Youtube Golden'),
     );
   }
@@ -41,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         title: Row(
           children: [
             Image.asset(
@@ -84,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Downloaded Files',
         child: Icon(
           Icons.link,
-          color: Colors.white,
+          color: Theme.of(context).iconTheme.color,
         ),
       ),
     );
