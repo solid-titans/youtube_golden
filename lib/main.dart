@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_golden/screens/videoDetails.dart';
 import 'package:youtube_golden/widgets/videoListWidget.dart';
 
 void main() {

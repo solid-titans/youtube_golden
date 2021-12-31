@@ -11,7 +11,7 @@ class VideoListWidget extends StatefulWidget {
 }
 
 class _VideoListWidgetState extends State<VideoListWidget> {
-  final List<VideoModel> video = List.generate(
+  final List<VideoModel> videoList = List.generate(
       1000,
       (index) => VideoModel(
           id: index,
@@ -22,8 +22,10 @@ class _VideoListWidgetState extends State<VideoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: this.video.length,
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemCount: this.videoList.length,
       cacheExtent: 20,
       addAutomaticKeepAlives: false,
       itemBuilder: (context, index) => Container(
@@ -31,49 +33,30 @@ class _VideoListWidgetState extends State<VideoListWidget> {
         child: Card(
           child: Column(
             children: [
-              Stack(
-                children: [
-                  Hero(tag: this.video[index].id, child: ThumbnailWidget()),
-                  Positioned(
-                    right: -10,
-                    child: PopupMenuButton(
-                      icon: Icon(Icons.more_vert),
-                      itemBuilder: (BuildContext context) => [
-                        PopupMenuItem(
-                          child: Text("Details"),
-                          onTap: () =>
-                              showDetails(context, this.video[index].id),
-                        ),
-                        PopupMenuItem(
-                          child: Text("Delete"),
-                          onTap: deleteVideo,
-                        )
-                      ],
-                    ),
-                  )
-                ],
+              InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) =>
+                        VideoDetails(video: this.videoList[index]),
+                  ),
+                ),
+                child: Hero(
+                  tag: this.videoList[index].id,
+                  child: ThumbnailWidget(),
+                ),
               ),
               SelectableText(
-                this.video[index].name,
+                this.videoList[index].name,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Text(
-                "${this.video[index].domain} - ${this.video[index].creationDate.toLocal()}",
+                "${this.videoList[index].domain} - ${this.videoList[index].creationDate.toLocal()}",
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  showDetails(context, int videoId) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (BuildContext context) => VideoDetails(
-          videoId: videoId,
         ),
       ),
     );
