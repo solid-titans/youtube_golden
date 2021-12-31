@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_golden/models/videoModel.dart';
 import 'package:youtube_golden/screens/videoDetails.dart';
 import 'package:youtube_golden/widgets/thumbnailWidget.dart';
+import 'package:youtube_golden/widgets/videoCardWidget.dart';
 
 class VideoListWidget extends StatefulWidget {
   const VideoListWidget({Key? key}) : super(key: key);
@@ -28,36 +29,8 @@ class _VideoListWidgetState extends State<VideoListWidget> {
       itemCount: this.videoList.length,
       cacheExtent: 20,
       addAutomaticKeepAlives: false,
-      itemBuilder: (context, index) => Container(
-        width: double.infinity,
-        child: Card(
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) =>
-                        VideoDetails(video: this.videoList[index]),
-                  ),
-                ),
-                child: Hero(
-                  tag: this.videoList[index].id,
-                  child: ThumbnailWidget(),
-                ),
-              ),
-              SelectableText(
-                this.videoList[index].name,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Text(
-                "${this.videoList[index].domain} - ${this.videoList[index].creationDate.toLocal()}",
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-            ],
-          ),
-        ),
+      itemBuilder: (context, index) => VideoCardWidget(
+        video: this.videoList[index],
       ),
     );
   }
