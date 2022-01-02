@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_golden/models/videoModel.dart';
-import 'package:youtube_golden/screens/videoDetails.dart';
-import 'package:youtube_golden/widgets/thumbnailWidget.dart';
 import 'package:youtube_golden/widgets/videoCardWidget.dart';
 
 class VideoListWidget extends StatefulWidget {
@@ -24,8 +22,9 @@ class _VideoListWidgetState extends State<VideoListWidget> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
       itemCount: this.videoList.length,
       cacheExtent: 20,
       addAutomaticKeepAlives: false,

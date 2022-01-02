@@ -13,28 +13,24 @@ class VideoCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => VideoDetails(video: video),
+    return Container(
+      width: double.infinity,
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => VideoDetails(video: video),
+          ),
         ),
-      ),
-      child: Container(
-        width: double.infinity,
         child: Card(
           child: Column(
             children: [
-              ThumbnailWidget(),
-              SelectableText(
-                video.name,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
+              Hero(tag: video.id, child: ThumbnailWidget()),
               Text(
-                "${video.creationDate.toLocal()} - From: ${video.domain}",
+                video.name,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
+                style: Theme.of(context).textTheme.bodyText1,
+              )
             ],
           ),
         ),
